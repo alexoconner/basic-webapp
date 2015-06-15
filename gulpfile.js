@@ -16,6 +16,7 @@ var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
 var del = require('del');
 var copy = require('gulp-copy');
+var concat = require('gulp-concat');
 
 var src = 'src/';
 var dist = 'dist/';
@@ -34,6 +35,13 @@ gulp.task('less', function() {
         .pipe(gulp.dest(dist));
 });
 
+gulp.task('scripts', function() {
+    return gulp.src(src + 'scripts/**/*')
+        .pipe(uglify())
+        .pipe(concat('scripts.js'))
+        .pipe(gulp.dest(dist));
+});
+
 gulp.task('html', function() {
     return gulp.src([src + '*.html', src + 'pages/**/*.html'])
         .pipe(usemin())
@@ -49,6 +57,9 @@ gulp.task('watch', ['build'], function() {
     watch(src + 'styles/**/*.less', function() {
         gulp.start('less');
     });
+    watch(src + 'assets/**/*', function() {
+        gulp.start('scripts');
+    });
     watch([src + '*.html', src + 'pages/**/*.html'], function() {
         gulp.start('html');
     });
@@ -57,6 +68,7 @@ gulp.task('watch', ['build'], function() {
 gulp.task('build', ['clean'], function() {
     return gulp.start([
         'less',
+        'scripts',
         'html',
         'assets'
     ]);
