@@ -2,7 +2,7 @@
  *
  * Basic Webapp Gulpfile
  * run "gulp" or "gulp build" for building into dist
- *
+ * @Tasks: [gulp, gulp watch, gulp build]
  */
 
 
@@ -61,3 +61,6 @@ gulp.task('build', ['clean'], function() {
         'assets'
     ]);
 });
+
+// run build that does everything on default
+gulp.task('default', ['build']);
