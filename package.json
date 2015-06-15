@@ -4,7 +4,7 @@
   "description": "Basic seed app for creating front end scripts with gulp",
   "main": "gulpfile.js",
   "dependencies": {
-    "gulp": "^3.9.0"
+    "normalize.less": "^1.0.0"
   },
   "devDependencies": {
     "del": "^1.2.0",
